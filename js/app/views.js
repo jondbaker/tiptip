@@ -38,8 +38,16 @@ TipTip.module(
         tagName: "tr",
         template: "#bill-item-tpl",
 
+        events: {
+            "click": "onClick"
+        },
+
         initialize: function() {
             this.listenTo(this.model, "change", this.render);
+        },
+
+        onClick: function() {
+            this.trigger("bill:save", this.model);
         }
     });
 

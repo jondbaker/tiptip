@@ -2,6 +2,7 @@ TipTip.module(
         "Models", function(Models, TipTip, Backbone, Marionette, $, _) {
     
     Models.Bill = Backbone.Model.extend({
+        urlRoot: "bills",
 
         // Recalculate 'tipAmount' whenever 'amount' changes
         initialize: function() {
@@ -35,11 +36,11 @@ TipTip.module(
             }
         }
     });
+    Models.configureStorage(Models.Bill);
 
     Models.Bills = Backbone.Collection.extend({
         model: Models.Bill,
         url: "bills"
     });
-
     Models.configureStorage(Models.Bills);
 });

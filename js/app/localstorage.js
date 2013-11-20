@@ -26,6 +26,6 @@ TipTip.module("Models", function(Models, TipTip, Backbone, Marionette, $, _) {
     };
 
     Models.configureStorage = function(model) {
-        _.extend(model.prototype, StorageMixin);
+        _.extend(model.prototype, new StorageMixin(model.prototype));
     };
 });

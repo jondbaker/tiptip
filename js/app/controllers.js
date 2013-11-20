@@ -40,6 +40,14 @@ TipTip.module(
                 }
             });
 
+            billsView.on("itemview:bill:save", function(childView, model) {
+                if (model.save()) {
+                    childView.$el.addClass("success");
+                } else {
+                    billCreateView.triggerMethod("input:invalid");
+                }
+            });
+
             layout.on("show", function() {
                 layout.headerRegion.show(billCreateView);
                 layout.mainRegion.show(billsView)

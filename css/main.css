@@ -12,3 +12,5 @@ input.error {
     background: #f2dede;
     border-color: #ebccd1;
 }
+
+tr.success { background: #e5e5e5; }
