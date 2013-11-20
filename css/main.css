@@ -1,0 +1,14 @@
+#container {
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+h1 { text-align: center; }
+
+#header-region { margin-bottom: 20px; }
+
+input { border: 1px solid #d5d5d5; }
+input.error {
+    background: #f2dede;
+    border-color: #ebccd1;
+}
