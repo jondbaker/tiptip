@@ -13,11 +13,28 @@
             <div id="app-region"></div>
         </div>
 
+        <!-- TEMPLATES -->
+        <script type="text/template" id="layout-tpl">
+            <div id="header-region"></div>
+            <div id="main-region"></div>
+        </script>
+
+        <script type="text/template" id="bill-create-tpl">
+            $ <input id="bill-create" type="text" placeholder="Bill Total (pre-tip)" autofocus />
+        </script>
+
+        <script type="text/template" id="bill-item-tpl">
+            <td><%= tipPercentage %>%</td>
+            <td><% if (tipAmount) { %>$<%= tipAmount %><% } %></td>
+        </script>
+
+        <!-- REMOTE ASSETS -->
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.3.0/lodash.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.marionette/1.1.0-bundled/backbone.marionette.min.js"></script>
 
+        <!-- LOCAL ASSETS -->
         <script src="./js/app/app.js"></script>
         <script src="./js/app/models.js"></script>
         <script src="./js/app/views.js"></script>
