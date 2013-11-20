@@ -37,6 +37,9 @@ TipTip.module(
     });
 
     Models.Bills = Backbone.Collection.extend({
-        model: Models.Bill
+        model: Models.Bill,
+        url: "bills"
     });
+
+    Models.configureStorage(Models.Bills);
 });
