@@ -1,11 +1,50 @@
 TipTip.module(
         "Views", function(Views, TipTip, Backbone, Marionette, $, _) {
 
-    Views.Bill = Marionette.ItemView.extend({});
+    Views.Layout = Marionette.Layout.extend({
+        template: "#layout-tpl",
 
-    Views.Bills = Marionette.CollectionView.extend({});
+        regions: {
+            headerRegion: "#header-region",
+            mainRegion: "#main-region"
+        }
+    });
 
-    Views.BillCreate = Marionette.ItemView.extend({});
+    Views.BillCreate = Marionette.ItemView.extend({
+        template: "#bill-create-tpl",
 
-    Views.Layout = Marionette.Layout.extend({});
+        ui: {
+            billCreate: "input#bill-create"
+        },
+
+        events: {
+            "keyup #bill-create": "onInputKeypress"
+        },
+
+        onInputInvalid: function() {
+            $(this.ui.billCreate).addClass("error");
+        },
+
+        onInputKeypress: function() {
+            this.trigger("bill-create:keypress", this.ui.billCreate.val());
+        },
+
+        onInputReset: function() {
+            $(this.ui.billCreate).removeClass("error");
+        }
+    });
+
+    Views.Bill = Marionette.ItemView.extend({
+        tagName: "tr",
+        template: "#bill-item-tpl",
+
+        initialize: function() {
+            this.listenTo(this.model, "change", this.render);
+        }
+    });
+
+    Views.Bills = Marionette.CollectionView.extend({
+        itemView: Views.Bill,
+        tagName: "table",
+    });
 });
