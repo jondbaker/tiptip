@@ -7,7 +7,8 @@ TipTip.module(
         // Recalculate 'tipAmount' whenever 'amount' changes
         initialize: function() {
             this.on("change", function() {
-                if (this.changed.hasOwnProperty("amount")) {
+                if (this.changed.hasOwnProperty("amount") &&
+                        this.changed.amount !== null) {
                     var amount = parseFloat(
                         this.changed.amount.replace(",", ""));
                     this.set({

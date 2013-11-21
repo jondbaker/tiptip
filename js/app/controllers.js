@@ -26,7 +26,7 @@ TipTip.module(
             var layout = new TipTip.Views.Layout(),
                 billCreateView = new TipTip.Views.BillCreate(),
                 billsView = new TipTip.Views.Bills(
-                    { collection: this.freshCollection });
+                    { collection: that.freshCollection });
 
             // get persisted models
             var fetchingBills = TipTip.request("bill:models");
@@ -46,6 +46,12 @@ TipTip.module(
                                 billCreateView.triggerMethod("input:invalid");
                                 return;
                             }
+                        });
+                    } else {
+                        that.freshCollection.forEach(function(bill) {
+                            bill.set({
+                                amount: null,
+                                tipAmount: null});
                         });
                     }
                 });

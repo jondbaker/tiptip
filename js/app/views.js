@@ -56,7 +56,7 @@ TipTip.module(
             that.$el.addClass("success");
             setTimeout(function() {
                 that.$el.removeClass("success");
-            }, 1500);
+            }, 2000);
         },
 
         templateHelpers: function() {
