@@ -10,9 +10,10 @@ TipTip.module(
                 if (this.changed.hasOwnProperty("amount")) {
                     var amount = parseFloat(
                         this.changed.amount.replace(",", ""));
-                    var tip = amount * this.get("tipPercentage") / 100.0;
+//                    var tip = amount * this.get("tipPercentage") / 100.0;
                     this.set({
-                        tipAmount: (Math.ceil(tip * 100) / 100).toFixed(2)});
+                        tipAmount: amount * this.get("tipPercentage") / 100.0});
+//                        tipAmount: (Math.ceil(tip * 100) / 100).toFixed(2)});
                 }
             });
         },
@@ -36,6 +37,9 @@ TipTip.module(
             }
         }
     });
+    Models.Bill.formatMoney = function(val) {
+        return "$" + (Math.ceil(val * 100) / 100).toFixed(2);
+    }
     Models.configureStorage(Models.Bill);
 
     Models.Bills = Backbone.Collection.extend({
@@ -43,4 +47,21 @@ TipTip.module(
         url: "bills"
     });
     Models.configureStorage(Models.Bills);
+
+    var API = {
+        getBills: function() {
+            var bills = new Models.Bills();
+            var defer = $.Deferred();
+            bills.fetch({
+                success: function(data) {
+                    defer.resolve(data);
+                }
+            });
+            return defer.promise();
+        }
+    }
+
+    TipTip.reqres.setHandler("bill:models", function() {
+        return API.getBills();
+    });
 });
