@@ -16,11 +16,20 @@ TipTip.module(
         template: "#bill-create-tpl",
 
         ui: {
-            billCreate: "input#bill-create"
+            billCreate: "input#bill-create",
+            inputClear: "button#js-input-clear"
         },
 
         events: {
-            "keyup #bill-create": "onInputKeypress"
+            "keyup #bill-create": "onInputKeypress",
+            "click #js-input-clear": "onInputClear"
+        },
+
+        onInputClear: function() {
+            if (this.ui.billCreate.val().length > 0) {
+                this.ui.billCreate.val("");
+                this.onInputKeypress();
+            }
         },
 
         onInputInvalid: function() {
