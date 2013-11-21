@@ -51,6 +51,14 @@ TipTip.module(
             this.trigger("bill:save", this.model);
         },
 
+        onFlash: function() {
+            var that = this;
+            that.$el.addClass("success");
+            setTimeout(function() {
+                that.$el.removeClass("success");
+            }, 1500);
+        },
+
         templateHelpers: function() {
             return {
                 formatMoney: function(val) {
@@ -65,14 +73,16 @@ TipTip.module(
         tagName: "table",
     });
 
-    Views.Stats = Backbone.View.extend({
+    Views.Panel = Backbone.View.extend({
 
-        initialize: function() {
-            this.totalAmount = 0.0;
-            this.totalPercentage = 0.0;
+        events: {
+            "click #js-history-clear": "clearHistoryClick"
         },
 
         _calculateStats: function() {
+            this.avgAmount = 0.0;
+            this.avgPercentage = 0.0;
+
             if (this.collection.length > 0) {
                 var totalAmount = 0.0,
                     totalPercentage = 0.0;
@@ -87,13 +97,24 @@ TipTip.module(
             }
         },
 
+        clearHistoryClick: function(e) {
+            e.preventDefault(); 
+            this.trigger("history:clear");
+        },
+
+        initialize: function() {
+            this.listenTo(this.collection, "remove", this.render);
+            this.listenTo(this.collection, "add", this.render);
+        },
+
         render: function() {
             this._calculateStats();
-            var template = _.template($("#bill-stats-tpl").html(), {
+            var template = _.template($("#bill-panel-tpl").html(), {
                 avgAmount: TipTip.Models.Bill.formatMoney(this.avgAmount),
                 avgPercentage: this.avgPercentage 
             });
             this.$el.html(template);
+            return this;
         }
     });
 });

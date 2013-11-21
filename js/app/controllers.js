@@ -31,7 +31,7 @@ TipTip.module(
             // get persisted models
             var fetchingBills = TipTip.request("bill:models");
             $.when(fetchingBills).done(function(bills) {
-                var statsView = new TipTip.Views.Stats(
+                var panelView = new TipTip.Views.Panel(
                     { collection: bills });
 
                 // event handler
@@ -53,16 +53,23 @@ TipTip.module(
                 // event handler
                 billsView.on("itemview:bill:save", function(childView, model) {
                     if (model.save()) {
-                        childView.$el.addClass("success");
+                        childView.triggerMethod("flash");
+                        // add to collection so stats update (avoid re-fetching)
+                        panelView.collection.add(model.clone());
                     } else {
                         billCreateView.triggerMethod("input:invalid");
                     }
                 });
 
+                // event handler
+                panelView.on("history:clear", function() {
+                    _.invoke(this.collection.toArray(), "destroy");
+                });
+
                 layout.on("show", function() {
                     layout.headerRegion.show(billCreateView);
                     layout.mainRegion.show(billsView);
-                    layout.footerRegion.show(statsView);
+                    layout.footerRegion.show(panelView);
                 });
 
                 TipTip.appRegion.show(layout);

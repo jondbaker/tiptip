@@ -19,15 +19,22 @@
         <script type="text/template" id="layout-tpl">
             <div id="header-region"></div>
             <div id="main-region"></div>
+            <div id="footer-region"></div>
         </script>
 
         <script type="text/template" id="bill-create-tpl">
-            $ <input id="bill-create" type="text" placeholder="Bill Total (pre-tip)" autofocus />
+            $ <input id="bill-create" type="text" placeholder="Bill Total" autofocus />
         </script>
 
         <script type="text/template" id="bill-item-tpl">
             <td><%= tipPercentage %>%</td>
-            <td><% if (tipAmount) { %>$<%= tipAmount %><% } %></td>
+            <td><% if (tipAmount) { %><%= formatMoney(tipAmount) %><% } %></td>
+        </script>
+
+        <script type="text/template" id="bill-panel-tpl">
+            <hr />
+            <p>Avg Tip: <%= avgPercentage %>%, <%= avgAmount %></p>
+            <button id="js-history-clear">Clear History</button>
         </script>
 
         <!-- REMOTE ASSETS -->

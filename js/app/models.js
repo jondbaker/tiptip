@@ -10,10 +10,8 @@ TipTip.module(
                 if (this.changed.hasOwnProperty("amount")) {
                     var amount = parseFloat(
                         this.changed.amount.replace(",", ""));
-//                    var tip = amount * this.get("tipPercentage") / 100.0;
                     this.set({
                         tipAmount: amount * this.get("tipPercentage") / 100.0});
-//                        tipAmount: (Math.ceil(tip * 100) / 100).toFixed(2)});
                 }
             });
         },
