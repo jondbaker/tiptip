@@ -111,7 +111,7 @@ TipTip.module(
             this._calculateStats();
             var template = _.template($("#bill-panel-tpl").html(), {
                 avgAmount: TipTip.Models.Bill.formatMoney(this.avgAmount),
-                avgPercentage: this.avgPercentage 
+                avgPercentage: this.avgPercentage.toFixed(2) + "%" 
             });
             this.$el.html(template);
             return this;
