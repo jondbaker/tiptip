@@ -18,12 +18,13 @@
         <!-- TEMPLATES -->
         <script type="text/template" id="layout-tpl">
             <div id="header-region"></div>
+            <div id="message-region"></div>
             <div id="main-region"></div>
             <div id="footer-region"></div>
         </script>
 
         <script type="text/template" id="bill-create-tpl">
-            $ <input id="bill-create" type="text" placeholder="Bill Total" autofocus />
+            $ <input id="bill-create" type="text" placeholder="24.99" autofocus />
         </script>
 
         <script type="text/template" id="bill-item-tpl">
@@ -39,7 +40,10 @@
 
         <script type="text/template" id="bills-composite-tpl">
             <table><tbody></tbody></table>
-            <p id="select-help"></p>
+        </script>
+
+        <script type="text/template" id="message-tpl">
+            <%= body %> 
         </script>
 
         <!-- REMOTE ASSETS -->

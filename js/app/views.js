@@ -6,6 +6,7 @@ TipTip.module(
 
         regions: {
             headerRegion: "#header-region",
+            messageRegion: "#message-region",
             mainRegion: "#main-region",
             footerRegion: "#footer-region"
         }
@@ -71,22 +72,20 @@ TipTip.module(
     Views.Bills = Marionette.CompositeView.extend({
         itemView: Views.Bill,
         itemViewContainer: "tbody",
-        template: "#bills-composite-tpl",
+        template: "#bills-composite-tpl"
+    });
 
-        ui: {
-            selectHelp: "p#select-help"
-        },
+    Views.Message = Marionette.ItemView.extend({
+        tagName: "p",
+        template: "#message-tpl",
 
-        onCompositeRendered: function() {
-            if (window.innerWidth > 768) {
-                $(this.ui.selectHelp).text("* Tap a tip to select it");
-            } else {
-                $(this.ui.selectHelp).text("* Click a tip to select it");
-            }
+        initialize: function() {
+            this.listenTo(this.model, "change", this.render);
         }
     });
 
     Views.Panel = Backbone.View.extend({
+        template: "#bill-panel-tpl",
 
         events: {
             "click #js-history-clear": "clearHistoryClick"
@@ -122,7 +121,7 @@ TipTip.module(
 
         render: function() {
             this._calculateStats();
-            var template = _.template($("#bill-panel-tpl").html(), {
+            var template = _.template($(this.template).html(), {
                 avgAmount: TipTip.Models.Bill.formatMoney(this.avgAmount),
                 avgPercentage: this.avgPercentage.toFixed(2) + "%" 
             });

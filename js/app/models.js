@@ -47,6 +47,8 @@ TipTip.module(
     });
     Models.configureStorage(Models.Bills);
 
+    Models.Message = Backbone.Model.extend({});
+
     var API = {
         getBills: function() {
             var bills = new Models.Bills();

@@ -19,6 +19,9 @@ TipTip.module(
 
         initialize: function() {
             this._createFreshBills(5, 5);
+            this.defaultMessageBody = "Enter your pre-tip bill total";
+            this.message = new TipTip.Models.Message(
+                {body: this.defaultMessageBody});
         },
 
         start: function() {
@@ -26,7 +29,8 @@ TipTip.module(
             var layout = new TipTip.Views.Layout(),
                 billCreateView = new TipTip.Views.BillCreate(),
                 billsView = new TipTip.Views.Bills(
-                    { collection: that.freshCollection });
+                    { collection: that.freshCollection }),
+                messageView = new TipTip.Views.Message({model: this.message});
 
             // get persisted models
             var fetchingBills = TipTip.request("bill:models");
@@ -43,16 +47,19 @@ TipTip.module(
                         }
                         that.freshCollection.forEach(function(bill) {
                             if (!bill.set({amount: amount}, {validate: true})) {
+                                that.message.set({body: "Invalid input"});
                                 billCreateView.triggerMethod("input:invalid");
                                 return;
+                            } else {
+                                that.message.set(
+                                    {body: "Select your tip"});
                             }
                         });
                     } else {
                         that.freshCollection.forEach(function(bill) {
-                            bill.set({
-                                amount: null,
-                                tipAmount: null});
+                            bill.set({amount: null, tipAmount: null});
                         });
+                        that.message.set({body: that.defaultMessageBody});
                     }
                 });
 
@@ -74,6 +81,7 @@ TipTip.module(
 
                 layout.on("show", function() {
                     layout.headerRegion.show(billCreateView);
+                    layout.messageRegion.show(messageView);
                     layout.mainRegion.show(billsView);
                     layout.footerRegion.show(panelView);
                 });
