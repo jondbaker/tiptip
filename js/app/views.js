@@ -68,9 +68,22 @@ TipTip.module(
         }
     });
 
-    Views.Bills = Marionette.CollectionView.extend({
+    Views.Bills = Marionette.CompositeView.extend({
         itemView: Views.Bill,
-        tagName: "table",
+        itemViewContainer: "tbody",
+        template: "#bills-composite-tpl",
+
+        ui: {
+            selectHelp: "p#select-help"
+        },
+
+        onCompositeRendered: function() {
+            if (window.innerWidth > 768) {
+                $(this.ui.selectHelp).text("* Tap a tip to select it");
+            } else {
+                $(this.ui.selectHelp).text("* Click a tip to select it");
+            }
+        }
     });
 
     Views.Panel = Backbone.View.extend({
