@@ -13,6 +13,15 @@
         <div class="container">
             <h1>TipTip</h1>
             <div id="app-region"></div>
+            <hr />
+            <div class="clearfix text-muted">
+                <p class="pull-left">
+                    <small>For Shelly Yocham</small>
+                </p>
+                <p class="pull-right">
+                    <small>&#169; 2013 Jonathan D. Baker</small>
+                </p>
+            </div>
         </div>
 
         <!-- TEMPLATES -->
@@ -34,13 +43,15 @@
         </script>
 
         <script type="text/template" id="bill-item-tpl">
-            <td><%= tipPercentage %>%</td>
+            <td><strong><%= tipPercentage %>%</strong></td>
             <td><% if (tipAmount) { %><%= formatMoney(tipAmount) %><% } %></td>
         </script>
 
         <script type="text/template" id="bill-panel-tpl">
-            <p class="pull-left">Avg Tip: <%= avgPercentage %>, <%= avgAmount %></p>
-            <button class="btn btn-default btn-sm pull-right" id="js-history-clear">Clear History</button>
+            <div class="clearfix">
+                <p class="pull-left">Your average tip is <%= avgPercentage %>, or <%= avgAmount %>.</p>
+                <button class="btn btn-default btn-sm pull-right" id="js-history-clear">Clear History</button>
+            </div>
         </script>
 
         <script type="text/template" id="bills-composite-tpl">
