@@ -17,7 +17,7 @@ TipTip.module(
 
         ui: {
             billCreate: "input#bill-create",
-            inputClear: "button#js-input-clear"
+            inputClear: "span#js-input-clear"
         },
 
         events: {
@@ -66,7 +66,7 @@ TipTip.module(
             that.$el.addClass("success");
             setTimeout(function() {
                 that.$el.removeClass("success");
-            }, 2000);
+            }, 3000);
         },
 
         templateHelpers: function() {

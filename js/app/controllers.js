@@ -19,9 +19,9 @@ TipTip.module(
 
         initialize: function() {
             this._createFreshBills(5, 5);
-            this.defaultMessageBody = "Enter your pre-tip bill total";
+            this.defaultMessageBody = "First, enter your pre-tip bill total.";
             this.message = new TipTip.Models.Message(
-                {body: this.defaultMessageBody});
+                {body: this.defaultMessageBody, kind: "info"});
         },
 
         start: function() {
@@ -47,12 +47,15 @@ TipTip.module(
                         }
                         that.freshCollection.forEach(function(bill) {
                             if (!bill.set({amount: amount}, {validate: true})) {
-                                that.message.set({body: "Invalid input"});
+                                that.message.set({
+                                    body: "Your input appears to be invalid.",
+                                    kind: "danger"});
                                 billCreateView.triggerMethod("input:invalid");
                                 return;
                             } else {
-                                that.message.set(
-                                    {body: "Select your tip"});
+                                that.message.set({
+                                    body: "Now, make your tip selection below.",
+                                    kind: "info"});
                             }
                         });
                     } else {
@@ -69,6 +72,9 @@ TipTip.module(
                         childView.triggerMethod("flash");
                         // add to collection so stats update (avoid re-fetching)
                         panelView.collection.add(model.clone());
+                        that.message.set({
+                            body: "Your tip selection was successfully saved.",
+                            kind: "success"});
                     } else {
                         billCreateView.triggerMethod("input:invalid");
                     }

@@ -6,11 +6,11 @@
         <title>TipTip</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="./css/normalize.css">
+        <link rel="stylesheet" href="./css/bootstrap.min.css">
         <link rel="stylesheet" href="./css/main.css">
     </head>
     <body>
-        <div id="container">
+        <div class="container">
             <h1>TipTip</h1>
             <div id="app-region"></div>
         </div>
@@ -24,8 +24,13 @@
         </script>
 
         <script type="text/template" id="bill-create-tpl">
-            $ <input id="bill-create" type="text" placeholder="24.99" autofocus />
-            <button id="js-input-clear">Clear Input</button>
+            <form role="form">
+                <div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <input class="form-control" id="bill-create" type="text" placeholder="24.99" autofocus />
+                    <span class="input-group-addon" id="js-input-clear">X</span>
+                </div>
+            </form>
         </script>
 
         <script type="text/template" id="bill-item-tpl">
@@ -34,17 +39,16 @@
         </script>
 
         <script type="text/template" id="bill-panel-tpl">
-            <hr />
-            <p>Avg Tip: <%= avgPercentage %>, <%= avgAmount %></p>
-            <button id="js-history-clear">Clear History</button>
+            <p class="pull-left">Avg Tip: <%= avgPercentage %>, <%= avgAmount %></p>
+            <button class="btn btn-default btn-sm pull-right" id="js-history-clear">Clear History</button>
         </script>
 
         <script type="text/template" id="bills-composite-tpl">
-            <table><tbody></tbody></table>
+            <table class="table table-bordered table-striped"><tbody></tbody></table>
         </script>
 
         <script type="text/template" id="message-tpl">
-            <%= body %> 
+            <div class="alert alert-<%= kind %>"><%= body %></div>
         </script>
 
         <!-- REMOTE ASSETS -->
