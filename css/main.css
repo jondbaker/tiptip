@@ -1,11 +1,24 @@
 body { font-size: 12px; }
 
+@font-face {
+    font-family: 'comic_zine_otregular';
+    src: url('../fonts/comic_zine_ot-webfont.eot');
+    src: url('../fonts/comic_zine_ot-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/comic_zine_ot-webfont.woff') format('woff'),
+         url('../fonts/comic_zine_ot-webfont.ttf') format('truetype'),
+         url('../fonts/comic_zine_ot-webfont.svg#comic_zine_otregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 #container {
     margin: 0 auto;
     max-width: 400px;
 }
 
 h1 {
+    font-family: "comic_zine_otregular";
+    font-size: 48px;
     margin: 18px 0;
     text-align: center;
 }
@@ -23,5 +36,8 @@ span#js-input-clear { cursor: pointer; }
 .alert { padding: 8px; }
 
 .table-striped>tbody>tr:nth-child(odd)>td { background-color: #f5f5f5; }
+.table-striped>tbody>tr.success:nth-child(odd)>td { background-color: #dff0d8; }
+
+table td { width: 50%; }
 
 hr { margin-bottom: 9px; }
