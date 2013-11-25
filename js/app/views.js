@@ -21,7 +21,8 @@ TipTip.module(
         },
 
         events: {
-            "keyup #bill-create": "onInputKeypress",
+            "keydown #bill-create": "onInputKeydown",
+            "keyup #bill-create": "onInputKeyup",
             "click #js-input-clear": "onInputClear"
         },
 
@@ -36,7 +37,13 @@ TipTip.module(
             $(this.ui.billCreate).addClass("error");
         },
 
-        onInputKeypress: function() {
+        onInputKeydown: function(e) {
+            if (e.which === 13) {  // ENTER
+                e.preventDefault();
+            }
+        },
+
+        onInputKeyup: function(e) {
             this.trigger("bill-create:keypress", this.ui.billCreate.val());
         },
 

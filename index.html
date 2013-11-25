@@ -49,8 +49,12 @@
 
         <script type="text/template" id="bill-panel-tpl">
             <div class="clearfix">
-                <p class="pull-left">Your average tip is <%= avgPercentage %>, or <%= avgAmount %>.</p>
-                <button class="btn btn-default btn-sm pull-right" id="js-history-clear">Clear History</button>
+                <p class="pull-left"><small>
+                    Your average tip is <%= avgPercentage %>, or <%= avgAmount %>.
+                </small></p>
+                <p class="pull-right"><small>
+                    <a href="#" id="js-history-clear">[Clear History]</a>
+                </small></p>
             </div>
         </script>
 
