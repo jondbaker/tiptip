@@ -39,6 +39,7 @@ TipTip.module(
 
         onInputKeydown: function(e) {
             if (e.which === 13) {  // ENTER
+                this.ui.billCreate.blur();
                 e.preventDefault();
             }
         },
