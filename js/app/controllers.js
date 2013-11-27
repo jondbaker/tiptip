@@ -54,7 +54,7 @@ TipTip.module(
                                 return;
                             } else {
                                 that.message.set({
-                                    body: "Now, make your tip selection below.",
+                                    body: "Now, tap/click a tip below to save it to your history.",
                                     kind: "info"});
                             }
                         });
